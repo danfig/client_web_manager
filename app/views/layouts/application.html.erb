@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ClientWebManager</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <link type='text/css' rel='stylesheet' href= "assets/stylesheets/bootstrap.css"/>
+
+  <%= javascript_include_tag "application" %>
+  <script src="assets/javascripts/bootstrap.min.js"></script>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div id="flash" class="flash_html"> 
+      <% unless flash[:notice].blank? %> 
+          <%= flash[:notice]%> 
+      <% end %> 
+      <% unless flash[:error].blank? %> 
+          <%= flash[:error]%> 
+      <% end %>
+       <% unless flash[:alert].blank? %> 
+          <%= flash[:alert]%> 
+      <% end %>
+  </div> 
+
+	 <div id="masthead" class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+
+			<a class="brand" href="#">Client Web Manager</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="<%= 'active' if params[:controller] == 'clients' %>">
+                <%= link_to "Clients", clients_path() %>
+              </li>
+               <li class="<%= 'active' if params[:controller] == 'websites' %>">
+               <%= link_to "Websites", websites_path() %>
+              </li>
+               <li class="<%= 'active' if params[:controller] == 'credentials' %>">
+                <%= link_to "Credentials", credentials_path() %>
+              </li>
+            </ul>
+          </div>
+
+		</div>
+	   </div>
+     </div>
+
+     <div class="container">
+
+        <div class="row">
+
+         <aside class="span3 bs-docs-sidebar">
+            <ul class="nav nav-list">
+              
+              <li><a href="#">Home</a></li>
+              <li class="nav-header">Clients</li>
+              <li class="<%= 'active' if current_page?(clients_path) %>"><%= link_to "View all", clients_path() %></li>
+              <li class="<%= 'active' if current_page?(new_client_path) %>"><%= link_to "Add new", new_client_path() %></li>
+              <li class="divider"></li>
+               <li class="nav-header">Websites</li>
+              <li><%= link_to "View all", websites_path() %></li>
+              <li><%= link_to "Add new", new_website_path() %></li>
+              <li class="divider"></li>
+               <li class="nav-header <%= 'active' if params[:controller] == 'credentials' %>">Credentials</li>
+              <li><%= link_to "View all", credentials_path() %></li>
+              <li><%= link_to "Add new", new_credential_path() %></li>
+              <li class="divider"></li>
+            </ul>
+         </aside>
+
+         <div class="span9">
+
+           <%= yield %>
+        </div>
+        </div>
+    </div>
+
+</body>
+</html>

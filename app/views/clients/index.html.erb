@@ -1,0 +1,38 @@
+
+
+<div class="hero-unit">
+  <h2>Listing all clients</h2>
+</div>
+
+<table class="table table-striped">
+  <tr>
+    <th>Name</th>
+    <th>Primary contact</th>
+    <th>Telephone</th>
+    <th>Email</th>
+    <th>Websites</th>
+    <th colspan="3">Actions</th>
+  </tr>
+<% if @clients.present? %>
+<% @clients.each do |client| %>
+  <tr>
+    <td><%= client.name %></td>
+    <td><%= client.primary_contact %></td>
+    <td><%= client.telephone %></td>
+    <td><%= client.email %></td>
+     <td><%= link_to 'View Websites', client_websites_path(:client_id => client) %></td>
+    <td><%= link_to 'Show', client %></td>
+    <td><%= link_to 'Edit', edit_client_path(client) %></td>
+    <td><%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+<% else %>
+   <tr>
+     <td colspan=8>You don't have any clients yet.</td>
+   </tr>
+<% end %>
+</table>
+
+<br />
+
+<%#= link_to 'New Client', new_client_path %>
